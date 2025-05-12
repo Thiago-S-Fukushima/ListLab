@@ -123,9 +123,9 @@ app.listen(PORT, () => {
 
 // Rota para adicionar tarefas.
 app.post('/task', (req, res) => {
-    if (!req.session.userId) {
+    /*if (!req.session.userId) {
         return res.status(401).send('Você precisa estar logado para adicionar tarefas.');
-    }
+    }*/
 
     const { descricao } = req.body;
     const userId = req.session.userId;
@@ -141,9 +141,9 @@ app.post('/task', (req, res) => {
 
 app.get('/task', (req, res) => {
     const userId = req.session.userId;
-    if (!req.session.userId) {
+    /*if (!req.session.userId) {
         return res.status(401).send('Você precisa estar logado para ver suas tarefas.');
-    }
+    }*/
 
     
     const query = 'SELECT * FROM task WHERE user_id = ?';
