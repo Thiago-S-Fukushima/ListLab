@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Você precisa estar logado para ver as tarefas.');
         window.location.href = './login.html';  // Redirecionar para a tela de login
         return; // Impede o carregamento das tarefas
-    }
+    };
 
     // Função para carregar as tarefas
     async function carregarTarefas() {
         const response = await fetch('http://localhost:3000/task', {
+            method: 'GET',
             credentials: 'include',
         });
 
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             tarefas.forEach(tarefa => {
                 const li = document.createElement('li');
-                li.textContent = tarefa.descricao;
+                li.textContent = tarefas.descricao;
 
                 if (tarefa.done) {
                     li.style.textDecoration = 'line-through';
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = 'Excluir';
                 deleteBtn.onclick = async () => {
-                    await fetch(`http://localhost:3000/task/${tarefa.id}`, {
+                    await fetch(`http://localhost:3000/task/${tarefas.id}`, {
                         method: 'DELETE',
                         credentials: 'include',
                     });
@@ -62,8 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         } else {
             alert('Erro ao carregar tarefas!');
-        }
-    }
+        };
+    };
 
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -72,9 +73,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         await fetch('http://localhost:3000/task', {
             method: 'POST',
             credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ descricao }),
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: JSON.stringify(descricao),
         });
+        if (descricao) {
+            console.log('tarefa criada.');
+        } else {
+            console.log('Erro ao criar a tarefa.')
+        }
 
         taskForm.reset();
         carregarTarefas();
@@ -85,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             method: 'POST',
             credentials: 'include',
         });
-        window.location.href = './login.html';
+        window.location.href = 'login.html';
     });
 
     carregarTarefas();

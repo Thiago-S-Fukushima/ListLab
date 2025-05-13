@@ -47,10 +47,6 @@ db.connect((err) => {
     console.log('Conectado ao banco de dados!');
 });
 
-app.get('/', (req, res) => {
-    res.send('servidor está funcionando!');
-});
-
 // Rota para cadastro de usuario.
 app.post('/register', (req, res) => {
     const { username, senha } = req.body;

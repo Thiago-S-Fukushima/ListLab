@@ -1,4 +1,5 @@
 // LOGIN
+const registro =  document.getElementById('registro');
 const loginForm = document.getElementById('loginForm');
 
 if (loginForm) {
@@ -20,12 +21,18 @@ if (loginForm) {
         const msg = await response.text();
 
         if (response.ok) {
-            window.location.href = './tarefas.html';
+            window.location.href = 'tarefas.html';
         } else {
             document.getElementById('erro').innerText = msg;
         }
     });
-}
+    registro.addEventListener('click', async () => {
+    await fetch('http://localhost:3000/register',{
+        method: 'POST',
+        credentials: 'include',
+    });
+});
+};
 
 //CADASTRO
 const registerForm = document.getElementById('registerForm');
@@ -54,7 +61,7 @@ if(registerForm) {
         
         if (response.ok) {
             alert(msg); // Mensagem de sucesso
-            window.location.href = './login.html'; // Redireciona para o login após sucesso
+            window.location.href = 'login.html'; // Redireciona para o login após sucesso
         } else {
             alert(msg); // Mensagem de erro
         }        
