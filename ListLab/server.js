@@ -9,7 +9,7 @@ const path = require('path');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5500']; // apenas localhost, sem 127.0.0.1
+const allowedOrigins = ['http://localhost:5500', 'http://127.0.0.1:5500']; // apenas localhost, sem 127.0.0.1
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -137,13 +137,21 @@ app.listen(PORT, () => {
 app.post('/task', (req, res) => {
     console.log('Sessão na rota /task:', req.session);
     console.log('userId da sessão', req.session.userId);
-    /*if (!req.session.userId) {
+    if (!req.session.userId) {
         return res.status(401).send('Você precisa estar logado para adicionar tarefas.');
-    }*/
+    }
 
     const { descricao } = req.body;
     const userId = req.session.userId;
 
+      if (!userId) {
+        return res.status(401).send('Você precisa estar logado para adicionar tarefas.');
+    }
+
+    if (!descricao || descricao.trim() === '') {
+        return res.status(400).send('Descrição da tarefa é obrigatória.');
+    }
+    
     const query = 'INSERT INTO task (user_id, descricao, done) VALUES (?, ?, ?)';
     db.query(query, [userId, descricao, false], (err, result) => {
         if (err) {

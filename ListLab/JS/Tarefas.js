@@ -29,7 +29,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             tarefas.forEach(tarefa => {
                 const li = document.createElement('li');
-                li.textContent = tarefa.descricao;
+                const dataObj = new Date(tarefa.created_at);
+                const dataFormatada = dataObj.toLocaleDateString('pt-BR') + ' ' + dataObj.toLocaleTimeString('pt-BR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                li.innerHTML = `<div><strong>Criada em </strong> ${dataFormatada}</div>
+                <div>${tarefa.descricao}</div>`;
 
                 if (tarefa.done) {
                     li.style.textDecoration = 'line-through';
