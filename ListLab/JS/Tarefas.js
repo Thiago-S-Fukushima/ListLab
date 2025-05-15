@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             tarefas.forEach(tarefa => {
                 const li = document.createElement('li');
-                li.textContent = tarefas.descricao;
+                li.textContent = tarefa.descricao;
 
                 if (tarefa.done) {
                     li.style.textDecoration = 'line-through';
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = 'Excluir';
                 deleteBtn.onclick = async () => {
-                    await fetch(`http://localhost:3000/task/${tarefas.id}`, {
+                    await fetch(`http://localhost:3000/task/${tarefa.id}`, {
                         method: 'DELETE',
                         credentials: 'include',
                     });
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            body: JSON.stringify(descricao),
+            body: JSON.stringify({descricao}),
         });
         if (descricao) {
             console.log('tarefa criada.');
@@ -96,3 +96,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     carregarTarefas();
 });
+
+  window.onload = () => {
+  fetch('http://localhost:3000/user', {
+    credentials: 'include' // importante para enviar cookies
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Não autenticado');
+    return res.json();
+  })
+  .then(data => {
+    const h2 = document.querySelector('h2');
+    h2.textContent = `Tarefas - ${data.username}`;
+  })
+  .catch(err => {
+    console.error(err);
+    // Se quiser, redireciona para login ou mostra mensagem
+  });
+};
+
+

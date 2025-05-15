@@ -2,6 +2,12 @@
 const registro =  document.getElementById('registro');
 const loginForm = document.getElementById('loginForm');
 
+if(registro) {
+    registro.addEventListener('click', () => {
+      window.location.href = 'cadastro.html';
+    });
+}
+
 if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -26,12 +32,6 @@ if (loginForm) {
             document.getElementById('erro').innerText = msg;
         }
     });
-    registro.addEventListener('click', async () => {
-    await fetch('http://localhost:3000/register',{
-        method: 'POST',
-        credentials: 'include',
-    });
-});
 };
 
 //CADASTRO

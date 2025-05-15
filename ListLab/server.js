@@ -9,10 +9,19 @@ const path = require('path');
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:5500']; // apenas localhost, sem 127.0.0.1
+
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
+
 
 app.use(express.json()); // Para lidar com JSON em requisições POST/PUT
 
@@ -39,7 +48,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Thiago@123',
-    database: 'Tarefas'
+    database: 'tarefas'
 });
 
 db.connect((err) => {
@@ -101,9 +110,16 @@ app.post('/login', (req, res) => {
             if (!result) return res.status(401).send('Senha incorreta.');
 
             req.session.userId = usuario.id;
+            req.session.save(err => {
+                if(err) {
+                    console.error('Erro ao salvar sessão:', err);
+                    return res.status(500).send('Erro interno ao salvar sessão.');
+                }
+            
 
             console.log('sessão criada:', req.session);
             res.send('Login bem sucedido!');
+        });
         });
     });
 });
@@ -119,6 +135,8 @@ app.listen(PORT, () => {
 
 // Rota para adicionar tarefas.
 app.post('/task', (req, res) => {
+    console.log('Sessão na rota /task:', req.session);
+    console.log('userId da sessão', req.session.userId);
     /*if (!req.session.userId) {
         return res.status(401).send('Você precisa estar logado para adicionar tarefas.');
     }*/
@@ -128,7 +146,10 @@ app.post('/task', (req, res) => {
 
     const query = 'INSERT INTO task (user_id, descricao, done) VALUES (?, ?, ?)';
     db.query(query, [userId, descricao, false], (err, result) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Erro ao inserir tarefa.', err);
+            return res.status(500).send('Erro ao adicionar tarefa.');
+        }
         res.send('Tarefa criada com sucesso!');
     });
 });
@@ -195,4 +216,17 @@ app.delete('/task/:id', (req, res) => {
         }
         res.send('Tarefa excluída com sucesso!');
     });
+});
+
+app.get('/user', (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).send('Usuário não autenticado');
+  }
+
+  db.query('SELECT username FROM usuarios WHERE id = ?', [req.session.userId], (err, result) => {
+    if (err) return res.status(500).send('Erro no banco de dados');
+    if (result.length === 0) return res.status(404).send('Usuário não encontrado');
+
+    res.json({ username: result[0].username });
+  });
 });
