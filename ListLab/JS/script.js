@@ -1,9 +1,9 @@
 // LOGIN
-const registro =  document.getElementById('registro');
+const register =  document.getElementById('register');
 const loginForm = document.getElementById('loginForm');
 
-if(registro) {
-    registro.addEventListener('click', () => {
+if(register) {
+    register.addEventListener('click', () => {
       window.location.href = 'cadastro.html';
     });
 }

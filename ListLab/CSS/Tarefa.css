@@ -1,0 +1,82 @@
+body {
+    margin: 0px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-image: url(/ListLab/img/wallhaven-49dyv1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#Task input,
+#Task button {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 20%; /* ou 100% se quiser ocupar tudo */
+    margin: 10px auto; /* auto centraliza horizontalmente */
+    padding: 10px;
+    font-size: 16px;
+}
+
+li {
+    text-align: left;
+    margin: 25px 0px; 
+}
+
+li div {
+    margin: 5px 0px 0px 0px;
+    font-size: 18px;
+}
+
+#taskList button {
+    margin: 5px;
+    font-size: 15px;
+}
+
+#add{           /*Manter o tamanho fixo*/
+    width: 357px;
+    height: 42px;
+}
+
+#logoutBtn{     /*Manter o tamanho fixo*/
+    width: 357px;
+    height: 42px;
+}
+
+ul li .checkBtn:hover{
+    background-color: green;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}
+
+#taskList li .deleteBtn:hover{
+    background-color: red;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}
+
+#logoutBtn:hover {
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}
+
+#add:hover{
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}

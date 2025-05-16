@@ -1,0 +1,56 @@
+body {
+    margin: 0px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/ListLab/img/wallhaven-nkzdxd.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#register, #entrar {
+    height: 42px;
+    width: 384px;
+}
+
+#cadastro input,
+#cadastro button,
+#login input,
+#login button {
+    display: block;
+    width: 80%; /* ou 100% se quiser ocupar tudo */
+    margin: 10px auto; /* auto centraliza horizontalmente */
+    padding: 10px;
+    font-size: 16px;
+}
+
+#login, #cadastro {
+    background-color: #eceaea;
+    height: 420px;
+    width: 480px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 30px;
+}
+
+#register:hover {
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}
+
+#entrar:hover {
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+}

@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="/ListLab/style.css">
+    <link rel="stylesheet" href="/ListLab/CSS/style.css">
 </head>
 <body>
+    <div id="cadastro">
     <h2>Cadastro</h2>
     <form id="registerForm">
         <input type="text" name="username" placeholder="Usuário" required />
         <input type="password" name="senha" placeholder="Senha" required />
-        <input type="password" name="confirmSenha" placeholder="Confirmar Senha" required />
-        <button type="submit">Cadastrar</button>
+        <input type="password" name="confirmSenha" placeholder="Confirmar Senha" required /><br>
+        <button type="submit" id="register">Cadastrar</button>
     </form>
     <p id="erro" style="color: red;"></p>
+    </div>
 
     <script src="/ListLab/JS/script.js"></script>
 </body>

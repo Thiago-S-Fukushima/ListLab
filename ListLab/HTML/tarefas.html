@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarefas</title>
-    <link rel="stylesheet" href="/ListLab/style.css">
+    <link rel="stylesheet" href="/ListLab/CSS/Tarefa.css">
 </head>
 <body>
-    <h2 id="titulo">Tarefas</h2>
-    <form id="taskForm">
-        <input type="text" id="descricao" placeholder="Nova Tarefa" required />
-        <button type="submit">Adicionar</button>
-    </form>
+    <div id="Task">
+        <h2 id="titulo"></h2>
+        <form id="taskForm">
+            <input type="text" id="descricao" placeholder="Nova Tarefa" required />
+            <button type="submit" id="add">Adicionar</button>
+        </form>
+    
+        <button id="logoutBtn">Logout</button>
+    </div>
 
     <ul id="taskList"></ul>
 
-    <button id="logoutBtn">Logout</button>
+    
 
     <script src="/ListLab/JS/Tarefas.js"></script>
 </body>

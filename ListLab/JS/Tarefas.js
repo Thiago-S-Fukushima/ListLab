@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     minute: '2-digit',
                     hour12: false
                 });
-                li.innerHTML = `<div><strong>Criada em </strong> ${dataFormatada}</div>
+                li.innerHTML = `<div id='data'><strong>Criada em ${dataFormatada} </strong></div>
                 <div>${tarefa.descricao}</div>`;
 
                 if (tarefa.done) {
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 const checkBtn = document.createElement('button');
+                checkBtn.className = 'checkBtn'; // <- adiciona classe
                 checkBtn.textContent = tarefa.done ? 'Desmarcar' : 'Concluir';
                 checkBtn.onclick = async () => {
                     await fetch(`http://localhost:3000/task/${tarefa.id}`, {
@@ -55,6 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 };
 
                 const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'deleteBtn'; // <- adiciona classe
                 deleteBtn.textContent = 'Excluir';
                 deleteBtn.onclick = async () => {
                     await fetch(`http://localhost:3000/task/${tarefa.id}`, {
